@@ -1,6 +1,7 @@
 package com.hmdp.config;
 
 import com.hmdp.utils.LoginInterceptor;
+import com.hmdp.utils.RefreshLoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,6 +22,8 @@ public class MvcConfig implements WebMvcConfigurer {
     @Autowired
     LoginInterceptor loginInterceptor;
 
+    @Autowired
+    RefreshLoginToken refreshLoginToken;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 登录拦截器
@@ -34,5 +37,6 @@ public class MvcConfig implements WebMvcConfigurer {
                         "/user/code",
                         "/user/login"
                 ).order(1);
+        registry.addInterceptor(refreshLoginToken).addPathPatterns("/**");
     }
 }
