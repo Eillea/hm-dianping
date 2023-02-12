@@ -70,12 +70,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             user =  CreateUserByPhone(phone);
         }
         UserDTO userDTO = BeanUtil.copyProperties(user, UserDTO.class);
-        //TODO 改用简单一点的
+        // TODO 改用简单一点的
         Map<String, Object> userMap = BeanUtil.beanToMap(userDTO, new HashMap<>(),
                 CopyOptions.create()
                         .setIgnoreNullValue(true)
                         .setFieldValueEditor((fieldName, fieldValue) -> fieldValue.toString()));
-        //TODO 改用JWT
+        // TODO 改用JWT
         String token = UUID.randomUUID().toString(true);
         String tokenKey = LOGIN_USER_KEY + token;
 
